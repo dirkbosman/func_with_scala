@@ -6,11 +6,24 @@ class Book(private val id_ : Int, private val title_ : String, private val autho
     def title = this.title_
     def author = this.author_
     def describe : Unit = println(s"${this.id};${this.title};${this.author}")
-    def sameAuthor(aBook : Book) = this.title == aBook.title
-    def ==(aBook : Book) = (this.id==aBook.id) && (this.title==aBook.title) && (this.sameAuthor(aBook))
+
+    // Overload: 
+    // We can also check that the author of a book is the same as the author of another book by giving a string as an
+    // argument instead of a Book object. This is also what we saw with constructors. The si`gnature was different, but 
+    // the compiler is able to determine which constructor should be used to create the objects.    
+    // def sameAuthor(aBook : Book) = this.title == aBook.title
+    // def sameAuthor(aBook : Book) = this.author == aBook.author
+    def sameAuthor(author: String): Boolean = this.author == author
+
+    def ==(aBook: Book): Boolean =
+        (this.id == aBook.id) &&
+        (this.title == aBook.title) &&
+        (this.sameAuthor(aBook.author))
+
     override def toString = s"The id is ${this.id}\nThe title is ${this.title}\nThe author is ${this.author}" 
 
 }
+
 
 object Var{
     private var ID : Int = 0
