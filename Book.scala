@@ -1,21 +1,18 @@
-// In Java, we are used to use the null keyword to represent a missing value. 
-// Even if it also exists in Scala, it is better to use Option where you put 
-// None when you don't have the information, otherwise it will be Some(a_value). 
-
 class Book(val id: Int = 0, val pages: Int = 0, val title : String = "Unknown",val author : String = "Unknown"){
+    def describe : Unit = println(s"${this.id};${this.title};${this.author}")
+    def tooLong = this.pages > 250
 }
 
 object Test extends App{
-    val aBook : Book = new Book
-    val bBook : Book = new Book(title="Les Misérables")
-    val cBook : Book = new Book(author="Hajime Isayama")
-    println(s"${aBook.id};${aBook.title};${aBook.author}")
-    println(s"${bBook.id};${bBook.title};${bBook.author}")
-    println(s"${cBook.id};${cBook.title};${cBook.author}")
+    val aBook = new Book(42,464,"La Promesse de l'Aube","Romain Gary")
+    aBook.describe
+
+    if (aBook.tooLong) println(s"The book ${aBook.title} is long.")	
 }
 
 // Result.....
-// % scala Book.scala
-// 0;Unknown;Unknown
-// 0;Les Misérables;Unknown
-// 0;Unknown;Hajime Isayama
+// dbosman@dbosmans-MBP func_with_scala % scala Book.scala             
+// Compiling project (Scala 3.6.2, JVM (23))
+// Compiled project (Scala 3.6.2, JVM (23))
+// 42;La Promesse de l'Aube;Romain Gary
+// The book La Promesse de l'Aube is long.
