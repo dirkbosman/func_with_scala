@@ -1,58 +1,91 @@
-// As you can see, we can call the describe method of the Book class on an instance of the Biopic class. 
-// This is possible, thanks to inheritance. In the same way, the second constructor is used to build an 
-// object of the class Biopic. Indeed, when constructing an instance of the Biopic class, we don't have 
-// to fill in the id_attribute. In the same way, the classes that we made inherit from App avoided writing 
-// the main method. This initial main function took as argument an array of strings named args. This 
-// corresponds to the arguments we could have given with the scala command.
+// We have seen previously that it is possible to use the set of functions of a parent class on an instance of a child class.
 
-class Book(private val id_ : Int, private val title_ : String, private val author_ : String) {
-    def this(title: String, author: String) = this(Var.acc, title, author)
-
+class Book(private val id_ : Int, private val title_ : String, private val author_ : String){
+    def this(title: String, author: String) = this(Var.acc,title,author)
     def id = this.id_
     def title = this.title_
     def author = this.author_
+    def describe : Unit = println(s"${this.id};${this.title};${this.author}")
+    def sameAuthor(aBook : Book) = this.title == aBook.title
+    def ==(aBook : Book) = (this.id==aBook.id) && (this.title==aBook.title) && (this.sameAuthor(aBook))
+    override def toString = s"The id is ${this.id}\nThe title is ${this.title}\nThe author is ${this.author}" 
 
-    def describe: Unit = println(s"${this.id};${this.title};${this.author}")
-    def sameAuthor(aBook: Book): Boolean = this.author == aBook.author
-    def ==(aBook: Book): Boolean = (this.id == aBook.id) && (this.title == aBook.title) && (this.sameAuthor(aBook))
 }
 
-object Var {
-    private var ID: Int = 0
-    def acc = { ID += 1; ID }
+object Var{
+    private var ID : Int = 0
+    def acc = {ID+=1;ID}    
 }
 
-class Biopic(private val famous_ : String, private val title_ : String, private val author_ : String)
-    extends Book(title_, author_)
+class Biopic(private val famous_ : String, private val title_ : String, private val author_ : String) extends Book(title_,author_){
+    def famous= this.famous_
+    
+    // We can use the keyword super which will be like the keyword this but refers to the parent class.
+    def ==(aBiopic : Biopic) = (super.== (aBiopic)) && (this.famous == aBiopic.famous) 
+    def ~(aBiopic : Biopic) = (super.title == aBiopic.title)  && (super.author == this.author) && (this.famous == aBiopic.famous)
+    override def toString = super.toString() + s"\nThis book speaks about ${this.famous}." 
+}
 
 object Test extends App {
-    val aBook = new Book("Les Misérables", "Victor Hugo")
-    val bBook = new Book("L'Assommoir", "Emile Zola")
-    val aBiopic = new Biopic("Romain Gary", "La Promesse de l'Aube", "Romain Gary")
+    val aBiopic = new Biopic("Romain Gary ","La Promesse de l'Aube","Romain Gary")    
+    val bBiopic = new Biopic("John Nash","A beautiful Mind","Sylvia Nasar")
+    val cBiopic = new Biopic("John Nash","A beautiful Mind","Sylvia Nasar")    
     
-    // The describe method is called for each book and the biopic. This prints the details (id, title, and author) of each
-    aBook.describe
-    bBook.describe
+    println(s"-----"*20)
+    println(s"Describe aBiopic, bBiopic & cBiopic:")
+    aBiopic.describe 
+    bBiopic.describe
     aBiopic.describe
 
-    // The sameAuthor method checks if the aBiopic and aBook have the same author. Since their authors 
-    // are different ("Romain Gary" vs. "Victor Hugo"), it prints: This is not the same author
-    if (aBiopic.sameAuthor(aBook)) println("This is the same author!")
-    else println("This is not the same author")
+    println(s"-----"*20)
+    val aBook = new Book("Les Misérables", "Victor Hugo")
+    println(s"Print aBook:")
+    println(aBook)
 
-    // The program checks for command-line arguments. Since none were provided, it prints: No arguments provided
-    if (Test.args != null && Test.args.nonEmpty)
-        println(Test.args.mkString(" "))
-    else
-        println("No arguments provided")
+    println(s"-----"*20)
+    println(s"Print aBiopic:")
+    println(aBiopic)
+
+    println(s"-----"*20)
+    // The previous program displays the sentence "This is not the same book" for the instances bBiopic and cBiopic 
+    // even though they are the same instances. The reason is that we also test the equality on the id.
+    if (bBiopic == cBiopic) 
+        println("This is the same book!") 
+    else 
+        println("This is *not* the same book!")    
+
+    println(s"-----"*20)
+    // Based on your current logic in ~, the program will print: "These biopics are similar!"
+    // Because bBiopic and cBiopic have the same title, author, and famous values.
+    if (bBiopic ~ cBiopic) 
+        println("These biopics are similar!")
+    else 
+        println("These biopics are *not* similar!")
+    println(s"-----"*20)
+    
 }
-
 
 // % scala Book.scala
 // Compiling project (Scala 3.6.2, JVM (23))
 // Compiled project (Scala 3.6.2, JVM (23))
-// 1;Les Misérables;Victor Hugo
-// 2;L'Assommoir;Emile Zola
-// 3;La Promesse de l'Aube;Romain Gary
-// This is not the same author
-// No arguments provided
+// ----------------------------------------------------------------------------------------------------
+// Describe aBiopic, bBiopic & cBiopic:
+// 1;La Promesse de l'Aube;Romain Gary
+// 2;A beautiful Mind;Sylvia Nasar
+// 1;La Promesse de l'Aube;Romain Gary
+// ----------------------------------------------------------------------------------------------------
+// Print aBook:
+// The id is 4
+// The title is Les Misérables
+// The author is Victor Hugo
+// ----------------------------------------------------------------------------------------------------
+// Print aBiopic:
+// The id is 1
+// The title is La Promesse de l'Aube
+// The author is Romain Gary
+// This book speaks about Romain Gary .
+// ----------------------------------------------------------------------------------------------------
+// This is *not* the same book!
+// ----------------------------------------------------------------------------------------------------
+// These biopics are similar!
+// ----------------------------------------------------------------------------------------------------
