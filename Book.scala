@@ -4,7 +4,7 @@ class Book(val id: Int = 0, val pages: Int = 0, val title : String = "Unknown",v
 }
 
 object Test extends App{
-    val aBook = new Book(42,464,"La Promesse de l'Aube","Romain Gary")
+    val aBook = new Book(42,460,"La Promesse de l'Aube","Romain Gary")
     aBook.describe
 
     if (aBook.tooLong) println(s"The book ${aBook.title} is long.")	
