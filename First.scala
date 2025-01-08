@@ -203,3 +203,85 @@ object First extends App {
     println(zListPlusOne)
 
 }
+
+
+
+
+// % scala First.scala                
+// Compiling project (Scala 3.6.2, JVM (23))
+// Compiled project (Scala 3.6.2, JVM (23))
+// a: 4
+// b: 3
+// b (new): 5
+// c: 32767
+// d: 76537292
+// e: 765372920763833
+// f: 3.14
+// g: 3.15
+// letter: a
+// percent: %
+// sentence: Scala is fun!
+// Hello, my name is Frédéric Bastiat
+// 1 + 1 = 2
+// I
+// h
+// a
+// t
+// e
+// 12
+// I hate
+// Scala
+// Scala
+// false
+// false
+// -----------------
+// For h=10, i=20 ....
+// h + i = 30
+// h - i = -10
+// h * i = 200
+// i / h = 2
+// i % h = 0
+// I like Scala
+// -----------------
+// For j=10, k=20 ....
+// j == k = false
+// j != k = true
+// j > k = false
+// j < k = true
+// j <= k = true
+// j >= k = false
+// false
+// true
+// true
+// true
+// true
+// -----------------
+// false
+// true
+// A && B = false
+// A || B = true
+// !(A && B) = true
+// I don't know
+// -----------------
+// I can't buy beer in America but in France, I can
+// -----------------
+// I am healthy
+// -----------------
+// 1
+// 4
+// List(1, 2)
+// 4
+// -----------------
+// List(10, 20, 16, 19, 98, 2, 8)
+// List(2, 8, 10, 16, 19, 20, 98)
+// List(8, 2, 98, 19, 16, 20, 10, 4)
+// List(36, 8, 2, 98, 19, 16, 20, 10)
+// List(8, 2, 98, 19, 16, 20, 10)
+// List(36, 8, 2, 98, 19, 16, 20, 10, 4)
+// List(2, 4, 8, 10, 16, 19, 20, 36, 98)
+// -----------------
+// A
+// 1
+// -----------------
+// List(2, 3, 4, 5, 6)
+
