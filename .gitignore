@@ -1,5 +1,19 @@
-*.class
-*.log
-
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+# Ignore compiled class files
+*.class
+
+# Ignore TASTY files (Scala 3)
+*.tasty
+
+# Optionally ignore other Scala build artifacts
+*.log
+*.tmp
+*.out
+
+# Ignore IDE-specific files (optional)
+.idea/
+.vscode/
+*.iml
