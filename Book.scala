@@ -1,37 +1,26 @@
-// Do not forget to replace val by var. Otherwise you will have an error.
-class Book(private var id: Int, val pages: Int, val title: String, val author: String ){
+// We see that the ID variable is indeed incremented at each instantiation of a Book object. 
+// The variable ID of Var is available in Test but also in Book by the method acc.
+
+class Book(val id: Int,val title: String, val author: String){
+    def this(title: String, author: String) = this(Var.acc,title,author)
+    def this(title: String) = this(Var.acc,title,"Unknown")
     def describe : Unit = println(s"${this.id};${this.title};${this.author}")
-    def getId = this.id
-    def setId(new_id: Int): Unit = this.id = new_id
+}
+object Var{
+    private var ID : Int = 0
+    def acc = {ID+=1;ID}    
 }
 
-// class Book(private var id_ : Int, val pages: Int, val title: String, val author: String ){
-//     def describe : Unit = println(s"${this.id};${this.title};${this.author}")
-//     def id = this.id_
-//     def id_= (new_id : Int) : Unit = this.id_ = new_id
-// }
-
-
-object Test extends App{
-    val aBook = new Book(42,464,"La Promesse de l'Aube","Romain Gary")
+object Test extends App {
+    val aBook = new Book("Voyage au bout de la nuit","Céline")
     aBook.describe
-    println(aBook.getId)
-    aBook.setId(1954)
-    println(aBook.getId)
+    val bBook = new Book("Jane Eyre","Charlotte Brontë")
+    bBook.describe
 }
 
-// object Test extends App{
-//     val aBook = new Book(42,464,"La Promesse de l'Aube","Romain Gary")
-//     aBook.describe
-//     println(aBook.id)
-//     aBook.id = 1954
-//     println(aBook.id)
-// }
 
-
-// % scala Book.scala             
+// % scala Book.scala
 // Compiling project (Scala 3.6.2, JVM (23))
 // Compiled project (Scala 3.6.2, JVM (23))
-// 42;La Promesse de l'Aube;Romain Gary
-// 42
-// 1954
+// 1;Voyage au bout de la nuit;Céline
+// 2;Jane Eyre;Charlotte Brontë
