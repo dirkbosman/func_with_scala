@@ -16,6 +16,7 @@ First steps with Scala:
 ### 4. (Optional) Install SBT (Scala Build Tool)
 - Install SBT: `brew install sbt`
 - Verify SBT installation: `sbt sbtVersion`
+- Scala Metals VSCode Extention
 
 ### 5. General Terminal Commands:
 - `% scalac Book.scala`
