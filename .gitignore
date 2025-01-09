@@ -16,6 +16,6 @@ hs_err_pid*
 .idea/
 .vscode/
 *.iml
-.bsp
+*.bsp
 .metals
 *.scala-build
