@@ -1,48 +1,32 @@
+// The infTen function returns true if the integer given as an argument is less than 10, 
+// so for each element of the collection list, if we get true with infTen at the element 
+// then that element is kept in the list returned by the filter function.
+
 object Test extends App {
-    var x = 8
+
+    def infTen(x:Int): Boolean = x < 10 
+    def odd(x:Int): Boolean = x % 2 != 0
     
-    def double(args: Int) : Int = args * 2
-    def triple(args: Int) : Int = args * 3
-
-    val collection = List(1,2,3,4,5)
-    val aList = List(4,5,2,3)
-
-    val aListDoubled = aList.map(double)
-    val aList6 = aListDoubled.map(triple)
-
+    val collection = List(1, 4, 6, 8, 6, 0, 8, 76, 90, 56, 9, 3)
+    val filter = collection.filter(infTen)
+    val filter_and_sorted = filter.sorted
+    val filter_and_sorted_2 = collection.filter(_ < 10).sorted
 
     println(s"-----"*20)
     collection.map(println)
 
-
     println(s"-----"*20)
-    println(collection(0))
-
-
-    println(s"-----"*20)
-    //higher order function a
-    val result_a = collection.map(double)
-    result_a.map(println)
-
-
-    println(s"-----"*20)
-    //higher order function b
-    val result_b = collection.map(double)
-    println(result_b(0))
-
-    println(s"-----"*20)
-    println(s"-----"*20)
-    aList.map(println)
+    filter.map(println)
     
     println(s"-----"*20)
-    aListDoubled.map(println)
-    
-    // Print out aList6, or you can also chain the map functions
-    println(s"-----"*20)
-    aList6.map(println)
+    println(filter_and_sorted)
+    println(filter_and_sorted_2)
 
     println(s"-----"*20)
-    aList.map(double).map(triple).map(println)
+    collection.filter(odd).map(println)
+    
+    println(s"-----"*20)
+    collection.filter(odd).sorted.map(println)
 
 }
 
@@ -51,38 +35,35 @@ object Test extends App {
 // Compiled project (Scala 3.6.2, JVM (23))
 // ----------------------------------------------------------------------------------------------------
 // 1
-// 2
-// 3
 // 4
-// 5
+// 6
+// 8
+// 6
+// 0
+// 8
+// 76
+// 90
+// 56
+// 9
+// 3
 // ----------------------------------------------------------------------------------------------------
 // 1
-// ----------------------------------------------------------------------------------------------------
-// 2
 // 4
 // 6
 // 8
-// 10
-// ----------------------------------------------------------------------------------------------------
-// 2
-// ----------------------------------------------------------------------------------------------------
-// ----------------------------------------------------------------------------------------------------
-// 4
-// 5
-// 2
+// 6
+// 0
+// 8
+// 9
 // 3
 // ----------------------------------------------------------------------------------------------------
-// 8
-// 10
-// 4
-// 6
+// List(0, 1, 3, 4, 6, 6, 8, 8, 9)
+// List(0, 1, 3, 4, 6, 6, 8, 8, 9)
 // ----------------------------------------------------------------------------------------------------
-// 24
-// 30
-// 12
-// 18
+// 1
+// 9
+// 3
 // ----------------------------------------------------------------------------------------------------
-// 24
-// 30
-// 12
-// 18
+// 1
+// 3
+// 9
