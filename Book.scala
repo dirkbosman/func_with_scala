@@ -24,7 +24,6 @@ class Book(private val id_ : Int, private val title_ : String, private val autho
 
 }
 
-
 object Var{
     private var ID : Int = 0
     def acc = {ID+=1;ID}    
