@@ -1,84 +1,63 @@
-// First comment out Book.scala before you can run below....
-
-class Book(private val id_ : Int, private val title_ : String,private val author_ : String){
-    def this(title: String, author: String) = this(Var.acc,title,author)
-    def id = this.id_
-    def title = this.title_
-    def author = this.author_
-    def describe : Unit = println(s"${this.id};${this.title};${this.author}")
-    def sameAuthor(aBook : Book) = this.title == aBook.title
-    def ==(aBook : Book) = (this.id==aBook.id)&& (this.title==aBook.title) && (this.sameAuthor(aBook))
-}
-
-object Var{
-    private var ID : Int = 0
-    def acc = {ID+=1;ID}    
-}
-
-class Biopic(private val famous_ : String, private val title_ : String, private val author_ : String) extends Book(title_, author_){
-
-}
-
-class Thriller(private val real_ : Boolean, private val title_ : String, private val author_ : String) extends Book(title_,author_){
-
-}
-
-
 object Test extends App {
-    val aBiopic = new Biopic("Romain Gary","La Promesse de l'Aube","Romain Gary")    
-    val aThriller = new Thriller(false,"The Silence of the Lambs","Thomas Harris")
-    def fun(aBook: Book) = aBook match{
-            case b: Biopic => println("This is a biopic")
-            // case b: Biopic => println(s"This is a biopic of ${b.author}")
-            case t: Thriller => println("This is a thriller")
-            // case t: Thriller => println(s"This is a thriller of ${t.author}")
-        }
-    fun(aBiopic)
-}
+    
+    val aList = List(1,2,3,4,5)
+    println("-----"*20)
+    println(aList.head)
 
+    println("-----"*5)
+    aList.tail.map(println)
+    // aList.tail map println
 
-object Factorial extends App {
-    //  recursive:
-    def factorial(args: Int) : Int = if (args == 1) 1 else args * factorial(args - 1)
-
-    //  pattern matching: The first case corresponds to our stop condition and the second case corresponds to recursive calls.
-    def facto(args: Int): Int =  args match {
-        case 1 => 1
-        case args => args * facto(args - 1)
+    
+    println("-----"*20)
+    // Our matching pattern consists of two case. The first is our stop condition and we will match 
+    // our list to Nil and the second, we break our list down into head and tail. We take the head 
+    // and apply the som function to the tail of the list until we get to Nil where we return 0.
+    def som(l:List[Int]) : Int = l match {
+        case Nil => 0
+        case head::tail => head + som(tail)
     }
-}
+    val sum = som(aList)
+    println(s"Sum of elements: $sum")
 
+    println("-----"*20)    
+    // Create the rev function which returns the list in reverse order:
+    def rev(l:List[Int]) : List[Int] = l match {
+        case Nil => Nil 
+        case head::tail => rev(tail):+head
+    }    
+    val reve = rev(aList)
+    println(s"Reverse of elements: $reve")
 
-object Fibonacci extends App {
-
-    //  recursive:
-    def fibonacci(x: Int): Int = {
-        if(x < 2) {
-            println(s"Returning $x for x = $x") // This is the log base case
-            println(s"======="*20)
-            x
-        }
-        else {
-            val result = fibonacci(x - 1) + fibonacci(x - 2)
-            println(s"Returning $result for x = $x") // This is the log recursive step
-            println(s"-------"*20)
-            result
-        }
+    println("-----"*20)
+    // Implement the last function which returns the last element of a list. If the list is empty, you 
+    // will return -1 (Let's assume that our list only takes positive elements to be consistent). If you 
+    // want to implement a "complete" last function you will need the Option type.
+    def last(l:List[Int]) : Option[Int] = l match {
+        case Nil => None
+        case head::Nil => Some(head)    
+        case head::tail => last(tail)
     }
+    val last_ = last(aList)
+    println(s"Last of elements: $last_")
 
-    //  pattern matching: 
-    def fibo(index: Int) : Int = index match {
-        case 0 => 0
-        case 1 => 1
-        case index => fibo(index-1)+fibo(index-2)
-    }
 
-    // println(s"Final result: ${fibonacci(6)}")
-    println(s"Final result: ${fibo(6)}")
 }
 
 
 // % scala Func.scala --main-class Fibonacci
 // Compiling project (Scala 3.6.2, JVM (23))
 // Compiled project (Scala 3.6.2, JVM (23))
-// Final result: 8
+// ----------------------------------------------------------------------------------------------------
+// 1
+// -------------------------
+// 2
+// 3
+// 4
+// 5
+// ----------------------------------------------------------------------------------------------------
+// Sum of elements: 15
+// ----------------------------------------------------------------------------------------------------
+// Reverse of elements: List(5, 4, 3, 2, 1)
+// ----------------------------------------------------------------------------------------------------
+// Last of elements: Some(5)
