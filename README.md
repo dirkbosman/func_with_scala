@@ -18,8 +18,13 @@ First steps with Scala:
 - Verify SBT installation: `sbt sbtVersion`
 - Scala Metals VSCode Extention
 
-### 5. General Terminal Commands:
+### 5. Terminal Commands:
+General
 - `% scalac Book.scala`
 - `% scala Book.scala`
 - `% rm *.class`
 - `% rm *.tasty`
+
+E.g. exercise_4
+- `scalac *.scala`
+- `scala *.scala`

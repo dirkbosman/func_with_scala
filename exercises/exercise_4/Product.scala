@@ -1,6 +1,8 @@
+package exercise_4
+
 abstract class Product(
     private val name_ : String,
-    private val type_ : String
+    private val type_ : String // "Fruit" or "Juice"
   ) {
 
     def name = this.name_
